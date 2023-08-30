@@ -1,0 +1,122 @@
+.product {
+  /* width: 90vw;
+  height: auto; */
+  /* margin: 1em auto; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  gap: 2rem;
+}
+
+.productImgDis {
+  display: flex;
+  max-width: 65vw;
+  align-items: center;
+  /* gap: 2rem; */
+}
+
+.productImgs {
+  /* background-color: rgb(253, 253, 253);
+  border-radius: 1rem; */
+  /* background-color: white;
+  border-radius: 2rem;
+  box-shadow: inset 0px 0px 50px -14px rgba(0, 0, 0, 0.1); */
+  width: 50rem;
+  height: 30rem;
+  /* border: 1px solid rgba(128, 128, 128, 0.218); */
+}
+
+.mainImg {
+  width: 40rem;
+  height: 25rem;
+
+  display: flex;
+  justify-content: center;
+}
+
+.productImgs > div > img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  padding: 1rem;
+}
+
+.secImgs {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.secImgs > img {
+  max-width: 6rem;
+  max-height: 5rem;
+  object-fit: contain;
+}
+.secImgs > img:hover {
+  transform: scale(1.4);
+  /* translate(-5%, -15%); */
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.prodDescription {
+  width: 100%;
+  height: auto;
+  max-width: 30vw;
+  max-height: 25vh;
+  min-width: 12rem;
+}
+
+@media screen and (max-width: 1450px) {
+  .productImgs {
+    /* background-color: white;
+    border-radius: 2rem;
+    box-shadow: inset 0px 0px 50px -14px rgba(0, 0, 0, 0.1); */
+    width: 100%;
+    height: auto;
+    /* max-width: 20vw;
+    max-height: 30vh; */
+  }
+  .mainImg {
+    /* border: 1px solid deeppink; */
+    /* width: 100%;
+    height: auto; */
+    width: 100%;
+    height: auto;
+    max-width: 40vw;
+    max-height: 30vh;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .product {
+    flex-wrap: wrap;
+
+    /* justify-content: center; */
+  }
+  .productImgDis {
+    flex-direction: column;
+    border: 1px solid deeppink;
+    /* flex-wrap: wrap;
+    justify-content: center; */
+    justify-content: space-around;
+  }
+  .mainImg {
+    width: 100%;
+    height: auto;
+    min-width: 60vw;
+    min-height: 25vw;
+    /* margin-left: auto;
+    margin-right: auto; */
+  }
+  /* .productImgs > div {
+    border: 1px solid deeppink;
+  }
+} */
+}

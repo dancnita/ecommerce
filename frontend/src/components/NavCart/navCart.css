@@ -1,0 +1,22 @@
+.navCartitemNo {
+  /* background-color: var(--x-red); */
+  border-radius: 10rem;
+  color: var(--x-blue);
+  font-weight: bold;
+  position: absolute;
+  top: -1.9rem;
+  left: -1.4rem;
+  /* z-index: 2; */
+  /* display: block; */
+}
+
+.navCart {
+  position: relative;
+}
+
+.navCart > span {
+  position: relative;
+  bottom: 0.4rem;
+
+  padding: 4px;
+}

@@ -1,0 +1,20 @@
+.addCartBtn {
+  background-color: var(--x-blue);
+  color: whitesmoke;
+  border-radius: 0.5rem;
+  width: 15rem;
+  height: 2.5rem;
+  /* font-weight: bold; */
+  font-size: large;
+  cursor: pointer;
+  line-height: 2;
+  border: none;
+  margin: 0.5rem 0;
+}
+
+.addCartBtn span:first-of-type {
+  float: left;
+  font-size: x-large;
+  position: relative;
+  bottom: 0.1em;
+}

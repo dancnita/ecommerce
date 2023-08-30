@@ -1,0 +1,27 @@
+.logo {
+  border: 1px solid #0094ff;
+  border-radius: 0.5em;
+  padding: 0 0.2em;
+
+  /* max-width: fit-content;
+  background: rgb(246, 3, 3);
+  background: linear-gradient(
+    90deg,
+    rgba(246, 3, 3, 1) 0%,
+    rgba(74, 9, 121, 1) 40%,
+    rgba(0, 148, 255, 1) 100%
+  ); */
+
+  font-size: xx-large;
+  font-weight: 900;
+  background: -webkit-linear-gradient(
+    0deg,
+    var(--x-red) 0%,
+    var(--x-violet) 50%,
+    var(--x-blue) 100%
+  );
+
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}

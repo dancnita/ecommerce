@@ -1,0 +1,24 @@
+.topBar {
+  position: relative;
+  top: 2px;
+  width: 90vw;
+  margin: 0.7rem auto;
+  /* padding: 0.5em 1em 0.5em 1.5em; */
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topBarSec {
+  height: 40px;
+  padding-bottom: 0;
+
+  background: -webkit-linear-gradient(
+    0deg,
+    var(--x-red) 0%,
+    var(--x-violet) 30%,
+    var(--x-blue) 60%,
+    var(--x-blue) 100%
+  );
+}

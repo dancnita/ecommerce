@@ -1,0 +1,10 @@
+.categoriesProd {
+  /* border: 1px solid deeppink; */
+  margin: 2em auto;
+
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  /* align-content: flex-start; */
+  gap: 40px 10px;
+}

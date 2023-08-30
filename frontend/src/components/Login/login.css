@@ -1,0 +1,15 @@
+.login > span {
+  position: relative;
+  bottom: 0.4rem;
+
+  padding: 4px;
+}
+
+.icon {
+  color: var(--x-blue);
+  font-size: xx-large;
+  position: relative;
+  bottom: -0.2rem;
+
+  margin-right: 0.2rem;
+}

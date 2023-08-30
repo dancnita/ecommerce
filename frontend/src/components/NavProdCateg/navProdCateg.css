@@ -1,0 +1,16 @@
+.navProdCateg {
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+.navProdCateg > span {
+  position: relative;
+  bottom: -1px;
+  left: 5px;
+}
+
+.iconTopBarSec {
+  font-size: x-large;
+  position: relative;
+  bottom: -6px;
+}

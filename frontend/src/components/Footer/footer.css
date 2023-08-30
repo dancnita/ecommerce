@@ -1,0 +1,6 @@
+.footer {
+  color: whitesmoke;
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--x-blue);
+}
