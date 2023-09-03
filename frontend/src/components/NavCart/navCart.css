@@ -9,6 +9,14 @@
   /* z-index: 2; */
   /* display: block; */
 }
+.navcart-icon {
+  color: var(--x-blue);
+  font-size: xx-large;
+  position: relative;
+  bottom: -0.2rem;
+
+  margin-right: 0.2rem;
+}
 
 .navCart {
   position: relative;
@@ -17,6 +25,5 @@
 .navCart > span {
   position: relative;
   bottom: 0.4rem;
-
   padding: 4px;
 }

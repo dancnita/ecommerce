@@ -10,7 +10,7 @@ const NavCart = () => {
   return (
     <Link to='/cart' className='text-link'>
       <div className='navCart'>
-        <HiOutlineShoppingCart className='icon' />
+        <HiOutlineShoppingCart className='navcart-icon' />
         <span
           className='navCartitemNo'
           style={{ display: totalCartItems === 0 ? 'none' : 'inline' }}

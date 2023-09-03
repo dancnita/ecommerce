@@ -1,3 +1,15 @@
-.favorites {
-  color: var(--x-red);
+.favorites-icon {
+  color: var(--x-blue);
+  font-size: xx-large;
+  position: relative;
+  bottom: -0.2rem;
+
+  margin-right: 0.2rem;
+}
+
+.favorites > span {
+  position: relative;
+  bottom: 0.4rem;
+
+  padding: 4px;
 }

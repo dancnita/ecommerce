@@ -1,6 +1,6 @@
 import React from 'react';
 import NavProdCateg from '../NavProdCateg/NavProdCateg';
-import { productsCateg } from '../../data';
+import { productsCateg } from '../../utilsScripts/data';
 
 const NavProdCategContainer = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { productsCateg } from '../../data';
+import { productsCateg } from '../../utilsScripts/data';
 import Card from '../Card/Card';
 import ClipLoaderContainer from '../ClipLoaderContainer/ClipLoaderContainer';
 import './caregoriesProd.css';

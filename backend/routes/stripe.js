@@ -1,21 +1,21 @@
 const router = require('express').Router();
-const stripe = require('stripe')(
-  'sk_test_51NkJqMLDzGYIsB1HLe16IGEUFXV2n1ff2N1ty5MhEzwzGNITki49qAoWEBLQjxizw4chjlzJ9esB4nqHTRVuBe3r00WZnEc0kx'
-);
+const stripe = require('stripe')(process.env.STRIPE_KEY);
 
 const Product = require('../models/Product');
+const Order = require('../models/Order');
+
 // const StripePay = require('../models/StripePay');
 
-const getCartProducts = async (qId) => {
-  try {
-    const products = await Product.find({
-      _id: { $in: qId.split(',') },
-    });
-  } catch (error) {
-    console.log(error);
-  }
-  console.log(products);
-};
+// const getCartProducts = async (qId) => {
+//   try {
+//     const products = await Product.find({
+//       _id: { $in: qId.split(',') },
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+//   console.log(products);
+// };
 
 // const storeItems = new Map([
 //   [1, { priceInCents: 10000, name: 'prod1' }],
@@ -23,9 +23,10 @@ const getCartProducts = async (qId) => {
 // ]);
 
 router.post('/create-checkout-session', async (req, res) => {
-  const qIds = req.body.items.map((item) => item.id);
-  //const qIds = qId.toString();
-  //console.log(qIds);
+  const orderId = req.body.orderId;
+  const findOrderInDb = await Order.findById(orderId);
+
+  const qIds = findOrderInDb.products.map((item) => item.productId);
 
   const findProductsInDB = await Product.find({
     _id: { $in: qIds },
@@ -44,7 +45,7 @@ router.post('/create-checkout-session', async (req, res) => {
           },
           unit_amount: item.price * 100,
         },
-        quantity: req.body.items[i].quantity,
+        quantity: findOrderInDb.products[i].quantity,
       });
     }
 
@@ -52,9 +53,11 @@ router.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       mode: 'payment',
       line_items: lineItems,
-      success_url: `http://localhost:5173/`,
-      cancel_url: `http://localhost:5173/Test`,
+      client_reference_id: orderId,
+      success_url: `http://localhost:5173/paySuccess`,
+      cancel_url: `http://localhost:5173/checkout`,
     });
+    //console.log(session);
     res.json({ url: session.url });
   } catch (e) {
     res.status(500).json({ error: e.message });

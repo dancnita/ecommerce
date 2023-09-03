@@ -1,4 +1,4 @@
-.addCartBtn {
+.btn {
   background-color: var(--x-blue);
   color: whitesmoke;
   border-radius: 0.5rem;
@@ -12,9 +12,13 @@
   margin: 0.5rem 0;
 }
 
-.addCartBtn span:first-of-type {
+.btn span:first-of-type {
   float: left;
   font-size: x-large;
   position: relative;
   bottom: 0.1em;
+}
+
+.btn:active span:first-of-type {
+  color: red;
 }

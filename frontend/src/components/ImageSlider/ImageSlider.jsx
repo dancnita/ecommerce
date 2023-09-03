@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './imageSlider.css';
-//import { slides } from '../../data';
 import { SlArrowRight, SlArrowLeft } from 'react-icons/sl';
 import ClipLoaderContainer from '../ClipLoaderContainer/ClipLoaderContainer';
 import { Link } from 'react-router-dom';
+import Image from '../Image/Image';
+import Parag from '../Parag/Parag';
 
 const ImageSlider = ({ data }) => {
   const [slide, setSlide] = useState(0);
@@ -33,14 +34,13 @@ const ImageSlider = ({ data }) => {
           data?.map((item, index) => (
             <div key={index}>
               <Link to={`/product/${item._id}`}>
-                <div
+                <Parag
                   style={slide !== index ? { display: 'none' } : null}
                   className='slideMsg'
-                >
-                  {data[index].msg}
-                </div>
-                {}
-                <img
+                  text={data[index].msg}
+                />
+
+                <Image
                   src={item.imgUrl[0]}
                   className={
                     slide === index
@@ -48,10 +48,6 @@ const ImageSlider = ({ data }) => {
                       : 'imgSlide imgSlideInactive'
                   }
                   alt={item.title}
-
-                  // onClick={(e) => {
-                  //   console.log(`${item._id}`);
-                  // }}
                 />
               </Link>
             </div>
@@ -59,7 +55,7 @@ const ImageSlider = ({ data }) => {
         )}
 
         <SlArrowRight onClick={nextSlide} className='arrow arrow-right' />
-        <span className='indicators'>
+        <div className='indicators'>
           {data?.map((item, index) => {
             return (
               <button
@@ -71,7 +67,7 @@ const ImageSlider = ({ data }) => {
               />
             );
           })}
-        </span>
+        </div>
       </div>
     </div>
   );

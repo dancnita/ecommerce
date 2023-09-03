@@ -1,18 +1,22 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 const cors = require('cors');
 const app = express();
 const productRoute = require('./routes/product');
 const productCategRoute = require('./routes/productCateg');
 const stripePayRoute = require('./routes/stripe');
+const bodyParser = require('body-parser');
+const orderRoute = require('./routes/order');
+
+//const userRoute = require('./routes/user');
 
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 //
-//const userRoute = require('./routes/user');
-
-dotenv.config();
 
 mongoose
   .connect(process.env.MONGO_URL)
@@ -22,11 +26,13 @@ mongoose
   });
 
 //
+
 app.use('/api', productRoute);
 app.use('/api', productCategRoute);
 app.use('/api', stripePayRoute);
+app.use('/api', orderRoute);
 
-//app.use('/api/user', userRoute);
+// app.use('/api', userRoute);
 
 //stripe to move ro stripe.js routes
 // const stripe = require('stripe')(

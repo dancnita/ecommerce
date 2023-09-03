@@ -4,8 +4,8 @@ import './favorites.css';
 
 const Favorites = () => {
   return (
-    <div className='login'>
-      <AiOutlineHeart className='icon' />
+    <div className='favorites'>
+      <AiOutlineHeart className='favorites-icon' />
       <span>Favorites</span>
     </div>
   );

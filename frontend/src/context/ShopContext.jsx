@@ -1,15 +1,30 @@
-import React from 'react';
-
-import { createContext, useState, useEffect } from 'react';
-
+import React, { createContext, useState, useEffect } from 'react';
 export const ShopContext = createContext(null);
 
 export const ShopContextProvider = (props) => {
   //prod:quantity
 
-  const [cartProducts, setCartProducts] = useState({});
+  // getFromLocalStorage
+
+  const getFromLocalStorage = (dataName) => {
+    const savedData = localStorage.getItem(`${dataName}`);
+    const initialValue = JSON.parse(savedData);
+    return initialValue || {};
+  };
+
+  const [cartProducts, setCartProducts] = useState(
+    getFromLocalStorage('cartProducts')
+  );
 
   const [totalCartItems, setTotalCartItems] = useState(0);
+
+  const [savedShippingDetails, setSavedShippingDetails] = useState(
+    getFromLocalStorage('shippingDet')
+  );
+
+  const [savedBillingDetails, setSavedBillingDetails] = useState(
+    getFromLocalStorage('billingDet')
+  );
 
   const removeFromCart = (item) => {
     setCartProducts((current) => {
@@ -73,21 +88,29 @@ export const ShopContextProvider = (props) => {
         })
       : null;
   };
+  useEffect(() => {
+    localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+  }, [cartProducts]);
+
+  useEffect(() => {
+    localStorage.setItem('shippingDet', JSON.stringify(savedShippingDetails));
+  }, [savedShippingDetails]);
+  useEffect(() => {
+    localStorage.setItem('billingDet', JSON.stringify(savedBillingDetails));
+  }, [savedBillingDetails]);
 
   const contextValue = {
     cartProducts,
-
     addToCart,
-
     addQuantityToCart,
-
     substrQuantityFromCart,
-
     totalCartItems,
-
     updateCartProductsInfo,
-
     removeFromCart,
+    savedShippingDetails,
+    savedBillingDetails,
+    setSavedBillingDetails,
+    setSavedShippingDetails,
   };
 
   return (

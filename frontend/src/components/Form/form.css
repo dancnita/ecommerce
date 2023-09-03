@@ -1,0 +1,6 @@
+input {
+  border: 0.1rem solid var(--x-blue);
+  border-radius: 0.2rem;
+  height: 1.5rem;
+  margin: 0.2rem 0;
+}

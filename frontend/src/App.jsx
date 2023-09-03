@@ -2,16 +2,14 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import Home from './Pages/Home';
+import Home from './Pages/Home/Home';
 import Test from './Pages/Test';
-import ProductList from './Pages/ProductList';
-import Product from './Pages/Product';
-import CartPage from './Pages/CartPage';
-import Checkout from './Pages/Checkout';
+import ProductList from './Pages/ProductList/ProductList';
+import Product from './Pages/Product/Product';
+import CartPage from './Pages/CartPage/CartPage';
+import Checkout from './Pages/Checkout/Checkout';
 import { ShopContextProvider } from './context/ShopContext';
-
-// import ImageSlider from './components/ImageSlider/ImageSlider';
-// import CategoriesProd from './components/CategoriesProd/CategoriesProd';
+import PaymentSuccess from './Pages/PaymentSuccess';
 
 function App() {
   return (
@@ -24,8 +22,9 @@ function App() {
           <Route path='/product/:id' element={<Product />} />
           <Route path='/cart' element={<CartPage />} />
           <Route path='/checkout' element={<Checkout />} />
+          <Route path='/paySuccess' element={<PaymentSuccess />} />
           {/* <Route path='/test' element={<Test />} /> */}
-          <Route path='*' element={<Test />} />
+          <Route path='*' element={<Home />} />
         </Routes>
         <Footer />
       </BrowserRouter>
