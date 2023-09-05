@@ -19,7 +19,7 @@ const Modal = ({ toggleModal, modalMsg, modalImgSrc, modalImgAlt }) => {
           onClick={() => toggleModal(false)}
           text='Close'
           ico={AiOutlineClose}
-          className='btn'
+          className='btn modal-btn'
         />
       </div>
     </div>

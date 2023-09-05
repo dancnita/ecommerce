@@ -10,14 +10,16 @@ const NavCart = () => {
   return (
     <Link to='/cart' className='text-link'>
       <div className='navCart'>
-        <HiOutlineShoppingCart className='navcart-icon' />
-        <span
-          className='navCartitemNo'
-          style={{ display: totalCartItems === 0 ? 'none' : 'inline' }}
-        >
-          {totalCartItems}
+        <span>
+          <HiOutlineShoppingCart className='navcart-icon' />
+          <span
+            className='navCartitemNo'
+            style={{ display: totalCartItems === 0 ? 'none' : 'inline' }}
+          >
+            {totalCartItems}
+          </span>
         </span>
-        <span> My Cart</span>
+        <span>My Cart</span>
       </div>
     </Link>
   );

@@ -4,8 +4,8 @@
   color: var(--x-blue);
   font-weight: bold;
   position: absolute;
-  top: -1.9rem;
-  left: -1.4rem;
+  top: -1.5rem;
+  left: 1rem;
   /* z-index: 2; */
   /* display: block; */
 }
@@ -13,8 +13,7 @@
   color: var(--x-blue);
   font-size: xx-large;
   position: relative;
-  bottom: -0.2rem;
-
+  bottom: -0.7rem;
   margin-right: 0.2rem;
 }
 
@@ -25,5 +24,4 @@
 .navCart > span {
   position: relative;
   bottom: 0.4rem;
-  padding: 4px;
 }

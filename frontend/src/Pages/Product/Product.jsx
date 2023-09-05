@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
-//import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../../context/ShopContext';
 import ProductImgs from '../../components/ProductImgs/ProductImgs';
 import ProductDescription from '../../components/ProductDescription/ProductDescription';
@@ -11,14 +10,19 @@ import { findProdUrl, getData } from '../../utilsScripts/utils';
 import TitleH2 from '../../components/TitleH2/TitleH2';
 
 const Product = () => {
-  const { addToCart } = useContext(ShopContext);
+  const { addToCart, addToFavorites } = useContext(ShopContext);
   const { id } = useParams();
   const [product, setProduct] = useState();
-
+  const [error, setError] = useState();
+  const navigate = useNavigate();
   const findProdUrlById = `${findProdUrl}${id}`;
 
   useEffect(() => {
-    getData(findProdUrlById, setProduct);
+    error ? navigate('/notFound') : null;
+  }, [error]);
+
+  useEffect(() => {
+    getData(findProdUrlById, setProduct, setError);
   }, [id]);
 
   return (
@@ -39,6 +43,7 @@ const Product = () => {
             </div>
             <AddToBtns
               addToCart={() => addToCart(product)}
+              addToFavorites={() => addToFavorites(product)}
               data={!product ? null : product}
             />
           </div>

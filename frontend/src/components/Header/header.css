@@ -22,3 +22,15 @@
     var(--x-blue) 100%
   );
 }
+
+/* .nav-elem-icon {
+  color: var(--x-blue);
+  font-size: xx-large;
+  position: relative;
+  bottom: -0.2rem;
+  margin-right: 0.2rem;
+}
+.nav-elem-title {
+  position: relative;
+  bottom: 0.4rem;
+} */

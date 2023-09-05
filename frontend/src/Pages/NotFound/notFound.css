@@ -1,0 +1,15 @@
+.icon-notFound {
+  font-size: 15rem;
+  color: var(--x-blue);
+}
+
+.not-found-errCode {
+  font-size: 5rem;
+
+  margin: 2rem;
+}
+
+.not-found-text {
+  font-size: x-large;
+  font-weight: bold;
+}

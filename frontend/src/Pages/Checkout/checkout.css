@@ -1,1 +1,18 @@
+.checkout-forms {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+/* .checkout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
 
+@media screen and (max-width: 750px) {
+  .checkout-forms {
+    display: block;
+    margin: 1rem;
+  }
+}

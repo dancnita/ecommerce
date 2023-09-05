@@ -4,24 +4,6 @@ const stripe = require('stripe')(process.env.STRIPE_KEY);
 const Product = require('../models/Product');
 const Order = require('../models/Order');
 
-// const StripePay = require('../models/StripePay');
-
-// const getCartProducts = async (qId) => {
-//   try {
-//     const products = await Product.find({
-//       _id: { $in: qId.split(',') },
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-//   console.log(products);
-// };
-
-// const storeItems = new Map([
-//   [1, { priceInCents: 10000, name: 'prod1' }],
-//   [2, { priceInCents: 20000, name: 'prod2' }],
-// ]);
-
 router.post('/create-checkout-session', async (req, res) => {
   const orderId = req.body.orderId;
   const findOrderInDb = await Order.findById(orderId);
@@ -57,11 +39,16 @@ router.post('/create-checkout-session', async (req, res) => {
       success_url: `http://localhost:5173/paySuccess`,
       cancel_url: `http://localhost:5173/checkout`,
     });
-    //console.log(session);
+
     res.json({ url: session.url });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
+
+  // const paymentIntent = await stripe.paymentIntents.retrieve(
+  //   'pi_3Nmc0wLDzGYIsB1H1Z7McWGj'
+  // );
+  // console.log(paymentIntent);
 });
 
 module.exports = router;

@@ -1,0 +1,14 @@
+.pay-succ-container {
+  padding-top: 4rem;
+  height: 69vh;
+}
+
+.icon-pay-succ {
+  color: var(--x-blue);
+  font-size: 15rem;
+  width: 50vw;
+}
+.parag-pay-succ {
+  font-size: larger;
+  font-weight: bold;
+}

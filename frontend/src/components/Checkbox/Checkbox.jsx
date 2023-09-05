@@ -1,8 +1,9 @@
 import React from 'react';
+import './checkbox.css';
 
 const Checkbox = ({ text, checked, onChange }) => {
   return (
-    <div>
+    <div className='checkbox'>
       <input type='checkbox' checked={checked} onChange={onChange} />
       <span>{text}</span>
     </div>

@@ -17,10 +17,12 @@ const Header = () => {
       <div className='topBar'>
         <Logo />
         <SearchBar />
-
         <a style={{ cursor: 'pointer' }} onClick={() => setShowModal(true)}>
           <Login />
         </a>
+
+        <Favorites />
+        <NavCart />
 
         {showModal ? (
           <Modal
@@ -31,9 +33,6 @@ const Header = () => {
             modalImgAlt='under-construction'
           />
         ) : null}
-
-        <Favorites />
-        <NavCart />
       </div>
       <NavProdCategContainer />
     </div>

@@ -1,15 +1,13 @@
-.favorites-icon {
+/* .favorites-nav-icon {
   color: var(--x-blue);
   font-size: xx-large;
   position: relative;
-  bottom: -0.2rem;
-
+  bottom: -0.7rem;
   margin-right: 0.2rem;
-}
-
-.favorites > span {
+} */
+/* 
+.favorites-nav span {
   position: relative;
   bottom: 0.4rem;
-
-  padding: 4px;
-}
+  left: -0.5rem;
+} */

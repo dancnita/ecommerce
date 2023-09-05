@@ -9,6 +9,7 @@
   /* display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   background-color: white; */
+  align-items: center;
 }
 .notInStock {
   opacity: 0.5;

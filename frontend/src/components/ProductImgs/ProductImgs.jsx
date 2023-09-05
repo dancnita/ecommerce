@@ -25,10 +25,6 @@ const ProductImgs = ({ data, className }) => {
                 />
               );
             })}
-        {/* <img src={data} alt='' />
-          <img src={data} alt='' />
-          <img src={data} alt='' />
-          <img src={data} alt='' /> */}
       </div>
     </div>
   );

@@ -2,26 +2,27 @@ import React from 'react';
 import Button from '../Button/Button';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { HiOutlineShoppingCart } from 'react-icons/Hi';
-import { Link } from 'react-router-dom';
 import './addToBtns.css';
 import Parag from '../Parag/Parag';
+import { currency } from '../../utilsScripts/data';
 
-const AddToBtns = ({ data, addToCart }) => {
+const AddToBtns = ({ data, addToCart, addToFavorites }) => {
   return (
-    <div>
-      <Parag text={`Price: ${data?.price}`} />
-      {/* <Link to='/cart'> </Link> */}
+    <div className='addToBtns'>
+      <Parag text={`Price: ${data?.price} ${currency}`} />
+
       <Button
-        className={'btn'}
+        className={'btn '}
         ico={HiOutlineShoppingCart}
         text={`Add to Cart`}
         onClick={addToCart}
       />
 
       <Button
-        className={'btn'}
+        className={'btn '}
         ico={AiOutlineHeart}
         text={`Add to Favorites`}
+        onClick={addToFavorites}
       />
     </div>
   );

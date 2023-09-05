@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import ProductImgs from '../../components/ProductImgs/ProductImgs';
 import ProductDescription from '../../components/ProductDescription/ProductDescription';
 import Button from '../../components/Button/Button';
-import { computersProd } from '../../utilsScripts/data';
 import { MdOutlineKeyboardDoubleArrowRight } from 'react-icons/md';
 import './cartPage.css';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
@@ -68,11 +66,14 @@ const CartPage = () => {
                     ></Button>
                   </div>
                 ) : null}
-                <Image
-                  src={!item.imgUrl ? null : item.imgUrl[0]}
-                  alt={item.title}
-                  className='cartProdImg'
-                />
+
+                <Link to={`/product/${item._id}`}>
+                  <Image
+                    src={!item.imgUrl ? null : item.imgUrl[0]}
+                    alt={item.title}
+                    className='cartProdImg'
+                  />
+                </Link>
 
                 <ProductDescription data={item.desc} className='cartProdDesc' />
                 <div>
@@ -103,15 +104,18 @@ const CartPage = () => {
           );
         })
       )}
-      <Parag text={`Total: ${getTotalAmount(cartProducts)} ${currency} `} />
+
       {totalCartItems < 1 ? null : (
-        <Link to='/checkout'>
-          <Button
-            ico={MdOutlineKeyboardDoubleArrowRight}
-            text={'Proceed to checkout'}
-            className={'btn'}
-          ></Button>
-        </Link>
+        <>
+          <Parag text={`Total: ${getTotalAmount(cartProducts)} ${currency} `} />
+          <Link to='/checkout'>
+            <Button
+              ico={MdOutlineKeyboardDoubleArrowRight}
+              text={'Proceed to checkout'}
+              className={'btn'}
+            ></Button>
+          </Link>
+        </>
       )}
     </div>
   );

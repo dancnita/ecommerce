@@ -14,6 +14,7 @@
 .modal-content {
   width: 40rem;
   height: 40rem;
+  max-width: 80vw;
   background-color: #fff;
   border-radius: 1rem;
   padding: 1rem;
@@ -41,6 +42,10 @@
 
 .modal-close {
   align-self: flex-end;
+}
+
+.modal-btn {
+  align-self: center;
 }
 
 .modal-fade {

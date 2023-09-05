@@ -1,38 +1,35 @@
 import React, { createContext, useState, useEffect } from 'react';
 export const ShopContext = createContext(null);
 
+const getFromLocalStorage = (dataName) => {
+  const savedData = localStorage.getItem(`${dataName}`);
+  const initialValue = JSON.parse(savedData);
+  return initialValue || {};
+};
+
 export const ShopContextProvider = (props) => {
-  //prod:quantity
-
-  // getFromLocalStorage
-
-  const getFromLocalStorage = (dataName) => {
-    const savedData = localStorage.getItem(`${dataName}`);
-    const initialValue = JSON.parse(savedData);
-    return initialValue || {};
-  };
-
   const [cartProducts, setCartProducts] = useState(
     getFromLocalStorage('cartProducts')
   );
-
+  const [favoriteProd, setFavoriteProd] = useState(
+    getFromLocalStorage('favoriteProd')
+  );
   const [totalCartItems, setTotalCartItems] = useState(0);
+  ///
+  const [totalFavoriteItems, setTotalFavoriteItems] = useState(0);
 
   const [savedShippingDetails, setSavedShippingDetails] = useState(
     getFromLocalStorage('shippingDet')
   );
-
   const [savedBillingDetails, setSavedBillingDetails] = useState(
     getFromLocalStorage('billingDet')
   );
-
   const removeFromCart = (item) => {
     setCartProducts((current) => {
       const copy = { ...current };
       delete copy[item._id];
       return copy;
     });
-    console.log(cartProducts);
   };
 
   const updateCartProductsInfo = (cartProductsUpdate) => {
@@ -50,13 +47,29 @@ export const ShopContextProvider = (props) => {
     const totalProdQuant = Object.values(cartProducts).map((item) => {
       return item.quantity;
     });
-
     return totalProdQuant.reduce((total, current) => total + current, 0);
   };
+  const getTotalFavoriteItems = () => {
+    const totalFavorites = Object.keys(favoriteProd).length;
+    return totalFavorites;
+  };
+  //console.log(getTotalFavoriteItems());
 
-  useEffect(() => {
-    setTotalCartItems(() => getTotalCartItems());
-  }, [cartProducts]);
+  const addToFavorites = (item) => {
+    Object.keys(favoriteProd).some((elem) => elem === item)
+      ? null
+      : setFavoriteProd((prev) => {
+          return { ...prev, [item._id]: item };
+        });
+  };
+
+  const removeFromFavorites = (item) => {
+    setFavoriteProd((current) => {
+      const copy = { ...current };
+      delete copy[item._id];
+      return copy;
+    });
+  };
 
   const addToCart = (item) => {
     Object.keys(cartProducts).some((elem) => elem === item)
@@ -88,9 +101,22 @@ export const ShopContextProvider = (props) => {
         })
       : null;
   };
+
+  useEffect(() => {
+    setTotalCartItems(() => getTotalCartItems());
+  }, [cartProducts]);
+
+  useEffect(() => {
+    setTotalFavoriteItems(() => getTotalFavoriteItems());
+  }, [favoriteProd]);
+
   useEffect(() => {
     localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
   }, [cartProducts]);
+
+  useEffect(() => {
+    localStorage.setItem('favoriteProd', JSON.stringify(favoriteProd));
+  }, [favoriteProd]);
 
   useEffect(() => {
     localStorage.setItem('shippingDet', JSON.stringify(savedShippingDetails));
@@ -101,12 +127,17 @@ export const ShopContextProvider = (props) => {
 
   const contextValue = {
     cartProducts,
+    setCartProducts,
     addToCart,
     addQuantityToCart,
     substrQuantityFromCart,
     totalCartItems,
     updateCartProductsInfo,
+    favoriteProd,
     removeFromCart,
+    removeFromFavorites,
+    addToFavorites,
+    totalFavoriteItems,
     savedShippingDetails,
     savedBillingDetails,
     setSavedBillingDetails,

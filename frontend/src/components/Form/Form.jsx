@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Parag from '../Parag/Parag';
+import TitleH4 from '../TitleH4/TitleH4';
 import InputText from '../InputText/InputText';
 import './form.css';
 
 const Form = ({ title, inputTemplate, errors, handleChange, className }) => {
   return (
-    <>
-      <Parag text={title} />
+    <div className='form-container'>
+      <TitleH4 text={title} />
 
       {inputTemplate.map((item, i) => (
         <InputText
@@ -35,7 +36,7 @@ const Form = ({ title, inputTemplate, errors, handleChange, className }) => {
           }
         />
       ))}
-    </>
+    </div>
   );
 };
 

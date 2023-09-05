@@ -1,0 +1,12 @@
+.revFormData-container {
+  border: 0.15rem solid var(--x-blue);
+  border-radius: 0.5rem;
+  max-width: 40vw;
+  min-width: fit-content;
+  margin: 1rem auto;
+  text-align: center;
+  padding: 0 2rem;
+}
+.revFormData-inline {
+  display: inline;
+}

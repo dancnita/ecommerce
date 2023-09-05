@@ -27,6 +27,7 @@ const InputText = ({
           onChange={onChange}
         />
       </label>
+
       <span
         style={
           isError ? { display: 'block', color: 'red' } : { display: 'none' }
