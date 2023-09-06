@@ -4,13 +4,14 @@
   margin-right: auto; */
   /* padding: 2rem; */
   text-align: center;
+  min-width: 350px;
 }
 
 .container {
   width: 90vw;
   height: auto;
   min-height: 59.1vh;
-
+  min-width: 350px;
   margin: 1em auto;
 }
 
@@ -25,12 +26,6 @@
 }
 
 @media screen and (max-width: 850px) {
-  .topBarSec {
-    display: none;
-  }
-  .burgerMenu {
-    display: block;
-  }
   .cartProduct {
     flex-direction: column;
     justify-content: center;

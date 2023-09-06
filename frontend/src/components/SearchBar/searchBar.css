@@ -27,6 +27,15 @@
 
 @media screen and (max-width: 850px) {
   .searchInput {
+    /* display: none; */
+    max-width: 20vw;
+  }
+  /* .searchBar {
+    border: none;
+  } */
+}
+@media screen and (max-width: 500px) {
+  .searchInput {
     display: none;
   }
   .searchBar {

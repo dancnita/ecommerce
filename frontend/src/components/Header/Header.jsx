@@ -5,22 +5,30 @@ import SearchBar from '../SearchBar/SearchBar';
 import Login from '../Login/Login';
 import Favorites from '../Favorites/Favorites';
 import NavCart from '../NavCart/NavCart';
-import NavProdCategContainer from '../NavProdCategContainer/NavProdCategContainer';
+import NavBar from '../NavBar/NavBar';
 import Modal from '../Modal/Modal';
 import underConstructionImg from '../../assets/under-construction-website-5kv.png';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { AiOutlineClose } from 'react-icons/ai';
 
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showSideBar, setShowSideBar] = useState(false);
+
+  const BurgerMenuIcon = showSideBar ? AiOutlineClose : GiHamburgerMenu;
 
   return (
     <div>
       <div className='topBar'>
+        <BurgerMenuIcon
+          className='sideBarBtn'
+          onClick={() => setShowSideBar(!showSideBar)}
+        />
         <Logo />
         <SearchBar />
         <a style={{ cursor: 'pointer' }} onClick={() => setShowModal(true)}>
           <Login />
         </a>
-
         <Favorites />
         <NavCart />
 
@@ -34,7 +42,7 @@ const Header = () => {
           />
         ) : null}
       </div>
-      <NavProdCategContainer />
+      <NavBar showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
     </div>
   );
 };

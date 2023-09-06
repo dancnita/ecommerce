@@ -7,4 +7,5 @@
   flex-wrap: wrap;
   /* align-content: flex-start; */
   gap: 40px 10px;
+  min-width: 350px;
 }

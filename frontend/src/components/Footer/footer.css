@@ -3,4 +3,5 @@
   display: flex;
   justify-content: space-around;
   background-color: var(--x-blue);
+  min-width: 350px;
 }

@@ -8,7 +8,7 @@ import { FiSmartphone } from 'react-icons/fi';
 import { IoGameControllerOutline } from 'react-icons/io5';
 import { FaTv } from 'react-icons/fa';
 
-const NavProdCateg = ({ text, icoId }) => {
+const NavProdCateg = ({ text, icoId, className, onClick }) => {
   const icons = [
     MdOutlineComputer,
     FaTabletAlt,
@@ -20,8 +20,8 @@ const NavProdCateg = ({ text, icoId }) => {
   const Ico = icons[icoId];
 
   return (
-    <div className='navProdCateg'>
-      <Link to={`/productList/${text}`} className='text-link'>
+    <div className={className}>
+      <Link to={`/productList/${text}`} className='text-link' onClick={onClick}>
         <Ico className='iconTopBarSec' />
         <span> {text}</span>
       </Link>

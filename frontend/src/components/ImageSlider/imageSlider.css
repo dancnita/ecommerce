@@ -4,6 +4,7 @@
   height: 70vh;
   margin: 1em auto; */
   /* border: 1px solid gray; */
+  min-width: 350px;
   border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.189) 0px 5px 15px;
 }
