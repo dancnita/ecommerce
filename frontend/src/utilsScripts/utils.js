@@ -8,6 +8,7 @@ const getProdctsUrl = `http://127.0.0.1:5000/api/products`;
 const postUrlShipBillCkeck = 'http://127.0.0.1:5000/api/order/shipBillCkeck';
 const postUrlSaveOrder = 'http://127.0.0.1:5000/api/order/save';
 const postToStripeUrl = 'http://localhost:5000/api/create-checkout-session';
+const searchProductsUrl = 'http://127.0.0.1:5000/api/products/?searchDT=';
 
 const postDefaultHeaders = {
   headers: {
@@ -20,7 +21,6 @@ const getData = async (url, setData, setError) => {
     const response = await axios.get(url);
     setData(response.data);
   } catch (error) {
-    // console.log(error.response.data);
     setError(error.response.data);
   }
 };
@@ -72,4 +72,5 @@ export {
   postToStripeUrl,
   getProductsIdQty,
   //checkObjectEmpty,
+  searchProductsUrl,
 };

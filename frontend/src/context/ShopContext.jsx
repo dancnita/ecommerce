@@ -8,6 +8,8 @@ const getFromLocalStorage = (dataName) => {
 };
 
 export const ShopContextProvider = (props) => {
+  const [searchResults, setSearchResults] = useState('');
+
   const [cartProducts, setCartProducts] = useState(
     getFromLocalStorage('cartProducts')
   );
@@ -142,6 +144,8 @@ export const ShopContextProvider = (props) => {
     savedBillingDetails,
     setSavedBillingDetails,
     setSavedShippingDetails,
+    searchResults,
+    setSearchResults,
   };
 
   return (

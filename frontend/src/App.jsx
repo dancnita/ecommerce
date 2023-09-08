@@ -11,6 +11,7 @@ import { ShopContextProvider } from './context/ShopContext';
 import PaymentSuccess from './Pages/PaymentSuccess/PaymentSuccess';
 import NotFound from './Pages/NotFound/NotFound';
 import FavoritesPage from './Pages/FavoritesPage/FavoritesPage';
+import SearchResultList from './Pages/SearchResultList/SearchResultList';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/paySuccess' element={<PaymentSuccess />} />
           <Route path='/favoritesPage' element={<FavoritesPage />} />
+          <Route path='/searchResultList' element={<SearchResultList />} />
           <Route path='/notFound' element={<NotFound />} />
           <Route path='*' element={<NotFound />} />
         </Routes>

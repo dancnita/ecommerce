@@ -22,9 +22,6 @@ router.get('/find/:id', async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     res.status(200).json(product);
-    // if (products.length === 0) {
-    //   res.json('Erroraseree');
-    //}
   } catch (err) {
     res.status(500).json(err);
   }
@@ -32,7 +29,8 @@ router.get('/find/:id', async (req, res) => {
 
 //GET ALL PRODUCTS
 router.get('/products', async (req, res) => {
-  const qNew = req.query.new;
+  const qSearchDescTitle = req.query.searchDT;
+
   const qCategory = req.query.category;
   const qId = req.query.id;
   try {
@@ -43,8 +41,14 @@ router.get('/products', async (req, res) => {
       products = await Product.find({
         _id: { $in: qId.split(',') },
       });
-    } else if (qNew) {
-      products = await Product.find().sort({ createdAt: -1 }).limit(1);
+    } else if (qSearchDescTitle) {
+      products = await Product.find({
+        //$options: 'i' => case insesnsitive
+        $or: [
+          { desc: { $regex: qSearchDescTitle, $options: 'i' } },
+          { title: { $regex: qSearchDescTitle, $options: 'i' } },
+        ],
+      });
     } else if (qCategory) {
       products = await Product.find({
         categ: [qCategory],

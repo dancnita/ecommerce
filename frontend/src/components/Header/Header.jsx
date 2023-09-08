@@ -26,6 +26,7 @@ const Header = () => {
         />
         <Logo />
         <SearchBar />
+
         <a style={{ cursor: 'pointer' }} onClick={() => setShowModal(true)}>
           <Login />
         </a>

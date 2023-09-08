@@ -1,16 +1,18 @@
 .searchBar {
+  position: relative;
   border: 1px solid var(--x-blue);
   border-radius: 3em;
   height: 3em;
+
   width: fit-content;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 10;
 }
 .searchInput {
   width: 100vw;
   max-width: 40vw;
-
   border: none;
   margin-left: 2em;
   background-color: #f1f1f100;
@@ -25,20 +27,38 @@
   font-size: x-large;
 }
 
+.mobileV {
+  display: none;
+}
+
 @media screen and (max-width: 850px) {
   .searchInput {
     /* display: none; */
-    max-width: 20vw;
+    max-width: 25vw;
   }
-  /* .searchBar {
-    border: none;
-  } */
+  .searchResults {
+    width: 85%;
+  }
 }
 @media screen and (max-width: 500px) {
-  .searchInput {
-    display: none;
+  .mobileV {
+    display: block;
   }
   .searchBar {
+    /* border: none; */
+    position: absolute;
+    top: -0.4rem;
+    left: 0;
+    width: 94vw;
+    background-color: rgb(241, 241, 241);
+    z-index: 10;
+    display: none;
+  }
+  .searchInput {
+    display: flex;
     border: none;
+    width: 100%;
+    min-width: 70vw;
+    display: none;
   }
 }
