@@ -1,22 +1,26 @@
 import React from 'react';
 import './searchResults.css';
 import Parag from '../Parag/Parag';
-import { Link, useNavigate } from 'react-router-dom';
+import ErrorMsg from '../ErrorMsg/ErrorMsg';
+import Container from '../Container/Container';
+import { useNavigate } from 'react-router-dom';
 
 const SearchResults = ({
   className,
   searchResults,
   isSearchBarFocus,
   searchInput,
-  onClick,
+  error,
   setIsSearchBarFocus,
 }) => {
   const navigate = useNavigate();
 
   return (
-    <div className={className}>
+    <Container className={className}>
       {!isSearchBarFocus ? null : searchInput.length < 3 ? (
         <Parag text={`Please enter at least 3 characters to search... `} />
+      ) : error ? (
+        <ErrorMsg error={error} />
       ) : searchResults.length === 0 ? (
         <Parag text={`No results for ${searchInput}.`} />
       ) : (
@@ -44,7 +48,7 @@ const SearchResults = ({
           })}
         </>
       )}
-    </div>
+    </Container>
   );
 };
 

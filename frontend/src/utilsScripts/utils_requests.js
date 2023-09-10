@@ -6,14 +6,13 @@ const productCategUrl = `${baseApiUrl}productCateg`;
 const frontPageProdUrl = `${baseApiUrl}frontPagProd`;
 const findProdUrl = `${baseApiUrl}find/`;
 const getProdctsUrl = `${baseApiUrl}products`;
-
-//
+const searchProductsUrl = `${baseApiUrl}products/?searchDT=`;
 const prodCategUrlById = `${baseApiUrl}products/?category=`;
+//
 
 const postUrlShipBillCkeck = `${baseApiUrl}order/shipBillCkeck`;
 const postUrlSaveOrder = `${baseApiUrl}order/save`;
 const postToStripeUrl = `${baseApiUrl}create-checkout-session`;
-const searchProductsUrl = `${baseApiUrl}products/?searchDT=`;
 
 const postDefaultHeaders = {
   headers: {
@@ -56,6 +55,7 @@ export {
   postDefaultHeaders,
   getData,
   findProdUrl,
-  //getProdctsUrl,
+  prodCategUrlById,
   getCartProductsInfo,
+  searchProductsUrl,
 };

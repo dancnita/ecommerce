@@ -17,14 +17,14 @@ const postDefaultHeaders = {
   },
 };
 
-const getData = async (url, setData, setError) => {
-  try {
-    const response = await axios.get(url);
-    setData(response.data);
-  } catch (error) {
-    setError(error.response.data);
-  }
-};
+// const getData = async (url, setData, setError) => {
+//   try {
+//     const response = await axios.get(url);
+//     setData(response.data);
+//   } catch (error) {
+//     setError(error.response.data);
+//   }
+// };
 
 const postData = async (url, dataToPost, options) => {
   const response = await axios.post(url, dataToPost, options);
@@ -60,7 +60,7 @@ const getProductsIdQty = (cartProducts) => {
 export {
   productCategUrl,
   frontPageProdUrl,
-  getData,
+  //getData,
   prodCategUrlById,
   findProdUrl,
   getTotalAmount,
