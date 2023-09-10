@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+const baseApiUrl = `http://127.0.0.1:5000/api/`;
 const productCategUrl = 'http://127.0.0.1:5000/api/productCateg';
 const frontPageProdUrl = 'http://127.0.0.1:5000/api/frontPagProd';
 const prodCategUrlById = `http://127.0.0.1:5000/api/products/?category=`;

@@ -1,0 +1,8 @@
+.categoriesProd {
+  margin: 2em auto;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 40px 10px;
+  min-width: 350px;
+}

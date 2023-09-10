@@ -1,0 +1,14 @@
+.adminAddProd {
+  display: block;
+  /* border: 1px solid deeppink; */
+}
+
+.adminAddProd > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid deeppink; */
+
+  padding: 1rem;
+}

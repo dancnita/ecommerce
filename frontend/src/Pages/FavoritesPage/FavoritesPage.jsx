@@ -8,13 +8,23 @@ import Parag from '../../components/Parag/Parag';
 import Image from '../../components/Image/Image';
 import { currency } from '../../utilsScripts/data';
 import { Link } from 'react-router-dom';
+import Container from '../../components/Container/Container';
+import {
+  removeObjFromObjsCollect,
+  addToCart,
+} from '../../utilsScripts/utils_ShopContext';
 
 const Favorites = () => {
-  const { totalFavoriteItems, favoriteProd, removeFromFavorites, addToCart } =
-    useContext(ShopContext);
+  const {
+    totalFavoriteItems,
+    favoriteProd,
+    setFavoriteProd,
+    cartProducts,
+    setCartProducts,
+  } = useContext(ShopContext);
 
   return (
-    <div className='container'>
+    <Container className='container'>
       <TitleH2 text='Favorites' />
 
       {totalFavoriteItems === 0 ? (
@@ -22,8 +32,8 @@ const Favorites = () => {
       ) : (
         Object.values(favoriteProd).map((item, i) => {
           return (
-            <div key={i}>
-              <div className='cartProduct'>
+            <Container key={i}>
+              <Container className='cartProduct'>
                 <Link to={`/product/${item._id}`}>
                   <Image
                     src={!item.imgUrl ? null : item.imgUrl[0]}
@@ -31,29 +41,32 @@ const Favorites = () => {
                     className='cartProdImg'
                   />
                 </Link>
-
                 <ProductDescription data={item.desc} className='cartProdDesc' />
                 <Parag text={`Price: ${item.price} ${currency}`} />
-
-                <div>
+                <Container>
                   <Button
                     ico={HiOutlineShoppingCart}
                     text={'Add to cart'}
                     className={'btn'}
-                    onClick={() => addToCart(item)}
-                  ></Button>
+                    onClick={() =>
+                      addToCart(cartProducts, setCartProducts, item)
+                    }
+                  />
+
                   <Parag
                     text={'Remove from Favorites'}
                     className={'remove-from-cart'}
-                    onClick={() => removeFromFavorites(item)}
+                    onClick={() =>
+                      removeObjFromObjsCollect(setFavoriteProd, item)
+                    }
                   />
-                </div>
-              </div>
-            </div>
+                </Container>
+              </Container>
+            </Container>
           );
         })
       )}
-    </div>
+    </Container>
   );
 };
 

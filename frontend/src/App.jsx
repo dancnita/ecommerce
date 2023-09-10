@@ -12,6 +12,7 @@ import PaymentSuccess from './Pages/PaymentSuccess/PaymentSuccess';
 import NotFound from './Pages/NotFound/NotFound';
 import FavoritesPage from './Pages/FavoritesPage/FavoritesPage';
 import SearchResultList from './Pages/SearchResultList/SearchResultList';
+import AdminAddProd from './Pages/AdminAddProd/AdminAddProd';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path='/favoritesPage' element={<FavoritesPage />} />
           <Route path='/searchResultList' element={<SearchResultList />} />
           <Route path='/notFound' element={<NotFound />} />
+          <Route path='/adminAddProd' element={<AdminAddProd />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />
@@ -37,13 +39,3 @@ function App() {
 }
 
 export default App;
-
-// <div>
-//   <Header />
-//   <div className='imgSliderContainer'>
-//     <ImageSlider />
-//   </div>
-//   <CategoriesProd />
-
-//   <Footer />
-// </div>

@@ -1,26 +1,19 @@
 import React, { useContext } from 'react';
 import { ShopContext } from '../../context/ShopContext';
 import TitleH2 from '../../components/TitleH2/TitleH2';
-import ClipLoaderContainer from '../../components/ClipLoaderContainer/ClipLoaderContainer';
+import ListAllProdCateg from '../../containers/ListAllProdCateg/ListAllProdCateg';
 import CardWide from '../../components/CardWide/CardWide';
+import Container from '../../components/Container/Container';
 const SearchResultList = () => {
   const { searchResults } = useContext(ShopContext);
 
   return (
-    <div className='container'>
+    <Container className='container'>
       <TitleH2 text={'Search Results'} />
-      <div className='productsList'>
-        {!searchResults
-          ? null
-          : searchResults.map((item, index) => {
-              return (
-                <div key={index}>
-                  <CardWide data={item} />
-                </div>
-              );
-            })}
-      </div>
-    </div>
+      <ListAllProdCateg className='productsList' data={searchResults}>
+        <CardWide />
+      </ListAllProdCateg>
+    </Container>
   );
 };
 

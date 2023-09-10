@@ -1,27 +1,44 @@
-import React, { useEffect, useState } from 'react';
 import ImageSlider from '../../components/ImageSlider/ImageSlider';
-import CategoriesProd from '../../components/CategoriesProd/CategoriesProd';
-//import axios from 'axios';
+import Container from '../../components/Container/Container';
+import Card from '../../components/Card/Card';
+import ListAllProdCateg from '../../containers/ListAllProdCateg/ListAllProdCateg';
+import ErrorMsg from '../../components/ErrorMsg/ErrorMsg';
+import './home.css';
+import React, { useEffect, useState } from 'react';
 import {
   productCategUrl,
   frontPageProdUrl,
   getData,
-} from '../../utilsScripts/utils';
+} from '../../utilsScripts/utils_requests';
 
 const Home = () => {
   const [prodCateg, setProdCateg] = useState(null);
   const [frontPageProd, setFrontPageProd] = useState(null);
+  const [frontPageProdError, setFrontPageProdError] = useState(null);
+  const [prodCategError, setProdCategError] = useState(null);
 
   useEffect(() => {
-    getData(productCategUrl, setProdCateg);
-    getData(frontPageProdUrl, setFrontPageProd);
+    getData(frontPageProdUrl, setFrontPageProd, setFrontPageProdError);
+
+    getData(productCategUrl, setProdCateg, setProdCategError);
   }, []);
 
   return (
-    <div className='container'>
-      <ImageSlider data={frontPageProd} />
-      <CategoriesProd data={prodCateg} />
-    </div>
+    <Container className='container'>
+      {frontPageProdError ? (
+        <ErrorMsg error={frontPageProdError} />
+      ) : (
+        <ImageSlider data={frontPageProd} />
+      )}
+
+      {prodCategError ? (
+        <ErrorMsg error={prodCategError} />
+      ) : (
+        <ListAllProdCateg className='categoriesProd' data={prodCateg}>
+          <Card />
+        </ListAllProdCateg>
+      )}
+    </Container>
   );
 };
 

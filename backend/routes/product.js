@@ -63,22 +63,26 @@ router.get('/products', async (req, res) => {
   }
 });
 
-// router.post('/product', async (req, res) => {
-//   const newProduct = new Product({
-//     title: req.body.title,
-//     desc: req.body.desc,
-//     imgUrl: req.body.imgUrl,
-//     categ: req.body.categ,
-//     inStock: req.body.inStock,
-//     price: req.body.price,
-//   });
+//SaveProduct
 
-//   try {
-//     const savedProduct = await newProduct.save();
-//     res.status(201).json(savedProduct);
-//   } catch (error) {
-//     res.status(500).json(error);
-//   }
-// });
+router.post('/product/newProd', async (req, res) => {
+  const newProduct = new Product({
+    title: req.body.title,
+    desc: req.body.desc,
+    imgUrl: req.body.imgUrl,
+    categ: req.body.categ,
+    inStock: req.body.inStock,
+    price: req.body.price,
+    msg: req.body.msg,
+    onFrontPage: req.body.onFrontPage,
+  });
+
+  try {
+    const savedProduct = await newProduct.save();
+    res.status(201).json(savedProduct);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 module.exports = router;

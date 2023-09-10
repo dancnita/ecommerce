@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CardWide from '../../components/CardWide/CardWide';
 import './productsList.css';
-//import axios from 'axios';
+import ListAllProdCateg from '../../containers/ListAllProdCateg/ListAllProdCateg';
+import Container from '../../components/Container/Container';
 import ClipLoaderContainer from '../../components/ClipLoaderContainer/ClipLoaderContainer';
 import { getData, prodCategUrlById } from '../../utilsScripts/utils';
 import TitleH2 from '../../components/TitleH2/TitleH2';
@@ -19,22 +20,26 @@ const ProductList = () => {
   }, [id]);
 
   return (
-    <div className='container'>
+    <Container className='container'>
       <TitleH2 text={id} />
-      <div className='productsList'>
+      <ListAllProdCateg data={products} className='productsList'>
+        <CardWide />
+      </ListAllProdCateg>
+
+      {/* <Container className='productsList'>
         {!products ? (
           <ClipLoaderContainer />
         ) : (
           products.map((item, index) => {
             return (
-              <div key={index}>
+              <Container key={index}>
                 <CardWide data={item} />
-              </div>
+              </Container>
             );
           })
         )}
-      </div>
-    </div>
+      </Container> */}
+    </Container>
   );
 };
 

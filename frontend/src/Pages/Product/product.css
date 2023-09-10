@@ -1,7 +1,4 @@
 .product {
-  /* width: 90vw;
-  height: auto; */
-  /* margin: 1em auto; */
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -14,19 +11,11 @@
   max-width: 65vw;
   height: auto;
   align-items: center;
-
-  /* gap: 2rem; */
 }
 
 .productImgs {
-  /* background-color: rgb(253, 253, 253);
-  border-radius: 1rem; */
-  /* background-color: white;
-  border-radius: 2rem;
-  box-shadow: inset 0px 0px 50px -14px rgba(0, 0, 0, 0.1); */
   width: 50rem;
   height: 30rem;
-  /* border: 1px solid rgba(128, 128, 128, 0.218); */
 }
 
 .mainImg {

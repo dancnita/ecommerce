@@ -5,6 +5,7 @@ import ClipLoaderContainer from '../ClipLoaderContainer/ClipLoaderContainer';
 import { Link } from 'react-router-dom';
 import Image from '../Image/Image';
 import Parag from '../Parag/Parag';
+import Container from '../../components/Container/Container';
 
 const ImageSlider = ({ data }) => {
   const [slide, setSlide] = useState(0);
@@ -25,14 +26,14 @@ const ImageSlider = ({ data }) => {
   }, [slide]);
 
   return (
-    <div className='imgSliderContainer'>
-      <div className='slideShow'>
+    <Container className='imgSliderContainer'>
+      <Container className='slideShow'>
         <SlArrowLeft onClick={prevSlide} className='arrow arrow-left' />
         {!data ? (
           <ClipLoaderContainer />
         ) : (
           data?.map((item, index) => (
-            <div key={index}>
+            <Container key={index}>
               <Link to={`/product/${item._id}`}>
                 <Parag
                   style={slide !== index ? { display: 'none' } : null}
@@ -50,12 +51,12 @@ const ImageSlider = ({ data }) => {
                   alt={item.title}
                 />
               </Link>
-            </div>
+            </Container>
           ))
         )}
 
         <SlArrowRight onClick={nextSlide} className='arrow arrow-right' />
-        <div className='indicators'>
+        <Container className='indicators'>
           {data?.map((item, index) => {
             return (
               <button
@@ -67,9 +68,9 @@ const ImageSlider = ({ data }) => {
               />
             );
           })}
-        </div>
-      </div>
-    </div>
+        </Container>
+      </Container>
+    </Container>
   );
 };
 

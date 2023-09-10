@@ -1,115 +1,36 @@
 import React, { createContext, useState, useEffect } from 'react';
+import {
+  getDataFromLocalStorage,
+  getTotalFavoriteItems,
+  getTotalCartItems,
+} from '../utilsScripts/utils_ShopContext';
+
 export const ShopContext = createContext(null);
 
-const getFromLocalStorage = (dataName) => {
-  const savedData = localStorage.getItem(`${dataName}`);
-  const initialValue = JSON.parse(savedData);
-  return initialValue || {};
-};
-
 export const ShopContextProvider = (props) => {
-  const [searchResults, setSearchResults] = useState('');
-
   const [cartProducts, setCartProducts] = useState(
-    getFromLocalStorage('cartProducts')
+    getDataFromLocalStorage('cartProducts')
   );
   const [favoriteProd, setFavoriteProd] = useState(
-    getFromLocalStorage('favoriteProd')
+    getDataFromLocalStorage('favoriteProd')
   );
-  const [totalCartItems, setTotalCartItems] = useState(0);
-  ///
-  const [totalFavoriteItems, setTotalFavoriteItems] = useState(0);
-
   const [savedShippingDetails, setSavedShippingDetails] = useState(
-    getFromLocalStorage('shippingDet')
+    getDataFromLocalStorage('shippingDet')
   );
   const [savedBillingDetails, setSavedBillingDetails] = useState(
-    getFromLocalStorage('billingDet')
+    getDataFromLocalStorage('billingDet')
   );
-  const removeFromCart = (item) => {
-    setCartProducts((current) => {
-      const copy = { ...current };
-      delete copy[item._id];
-      return copy;
-    });
-  };
 
-  const updateCartProductsInfo = (cartProductsUpdate) => {
-    cartProductsUpdate.map((item) => {
-      setCartProducts((prev) => {
-        return {
-          ...prev,
-          [item._id]: { ...item, quantity: cartProducts[item._id].quantity },
-        };
-      });
-    });
-  };
-
-  const getTotalCartItems = () => {
-    const totalProdQuant = Object.values(cartProducts).map((item) => {
-      return item.quantity;
-    });
-    return totalProdQuant.reduce((total, current) => total + current, 0);
-  };
-  const getTotalFavoriteItems = () => {
-    const totalFavorites = Object.keys(favoriteProd).length;
-    return totalFavorites;
-  };
-  //console.log(getTotalFavoriteItems());
-
-  const addToFavorites = (item) => {
-    Object.keys(favoriteProd).some((elem) => elem === item)
-      ? null
-      : setFavoriteProd((prev) => {
-          return { ...prev, [item._id]: item };
-        });
-  };
-
-  const removeFromFavorites = (item) => {
-    setFavoriteProd((current) => {
-      const copy = { ...current };
-      delete copy[item._id];
-      return copy;
-    });
-  };
-
-  const addToCart = (item) => {
-    Object.keys(cartProducts).some((elem) => elem === item)
-      ? null
-      : setCartProducts((prev) => {
-          return { ...prev, [item._id]: { ...item, quantity: 1 } };
-        });
-  };
-
-  const addQuantityToCart = (item) => {
-    setCartProducts((prev) => {
-      return {
-        ...prev,
-
-        [item._id]: { ...item, quantity: prev[item._id].quantity + 1 },
-      };
-    });
-  };
-
-  const substrQuantityFromCart = (item) => {
-    cartProducts[item._id].quantity === 1
-      ? removeFromCart(item)
-      : cartProducts[item._id].quantity > 1
-      ? setCartProducts((prev) => {
-          return {
-            ...prev,
-            [item._id]: { ...item, quantity: prev[item._id].quantity - 1 },
-          };
-        })
-      : null;
-  };
+  const [searchResults, setSearchResults] = useState('');
+  const [totalCartItems, setTotalCartItems] = useState(0);
+  const [totalFavoriteItems, setTotalFavoriteItems] = useState(0);
 
   useEffect(() => {
-    setTotalCartItems(() => getTotalCartItems());
+    setTotalCartItems(() => getTotalCartItems(cartProducts));
   }, [cartProducts]);
 
   useEffect(() => {
-    setTotalFavoriteItems(() => getTotalFavoriteItems());
+    setTotalFavoriteItems(() => getTotalFavoriteItems(favoriteProd));
   }, [favoriteProd]);
 
   useEffect(() => {
@@ -130,15 +51,9 @@ export const ShopContextProvider = (props) => {
   const contextValue = {
     cartProducts,
     setCartProducts,
-    addToCart,
-    addQuantityToCart,
-    substrQuantityFromCart,
     totalCartItems,
-    updateCartProductsInfo,
     favoriteProd,
-    removeFromCart,
-    removeFromFavorites,
-    addToFavorites,
+    setFavoriteProd,
     totalFavoriteItems,
     savedShippingDetails,
     savedBillingDetails,

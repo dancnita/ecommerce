@@ -1,5 +1,3 @@
-import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
 import ProductDescription from '../../components/ProductDescription/ProductDescription';
 import Button from '../../components/Button/Button';
 import { MdOutlineKeyboardDoubleArrowRight } from 'react-icons/md';
@@ -11,113 +9,131 @@ import { Link } from 'react-router-dom';
 import TitleH2 from '../../components/TitleH2/TitleH2';
 import Parag from '../../components/Parag/Parag';
 import Image from '../../components/Image/Image';
+import Container from '../../components/Container/Container';
+import ErrorMsg from '../../components/ErrorMsg/ErrorMsg';
+
+import React, { useContext, useEffect, useState } from 'react';
 import { currency } from '../../utilsScripts/data';
-import { getTotalAmount, getProdctsUrl } from '../../utilsScripts/utils';
+import { getTotalAmount } from '../../utilsScripts/utils';
+import { getCartProductsInfo } from '../../utilsScripts/utils_requests';
+import {
+  removeObjFromObjsCollect,
+  addQuantityToCart,
+  substrQuantityFromCart,
+  updateCartProductsInfo,
+} from '../../utilsScripts/utils_ShopContext';
 
 const CartPage = () => {
-  const {
-    cartProducts,
-    addQuantityToCart,
-    substrQuantityFromCart,
-    totalCartItems,
-    updateCartProductsInfo,
-    removeFromCart,
-  } = useContext(ShopContext);
+  const { cartProducts, setCartProducts, totalCartItems } =
+    useContext(ShopContext);
+  const [error, setError] = useState(null);
   //cjkeck quantity/in stock!
 
-  const getCartProductsInfo = async () => {
-    if (Object.keys(cartProducts).length > 0) {
-      try {
-        const response = await axios.get(getProdctsUrl, {
-          params: {
-            id: Object.keys(cartProducts).toString(),
-          },
-        });
-        updateCartProductsInfo(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   useEffect(() => {
-    getCartProductsInfo();
+    getCartProductsInfo(
+      cartProducts,
+      updateCartProductsInfo,
+      setCartProducts,
+      setError
+    );
   }, []);
 
   return (
-    <div className='container'>
+    <Container className='container'>
       <TitleH2 text='Cart' />
-
-      {totalCartItems === 0 ? (
-        <Parag text='Your Cart is empty.' />
+      {error ? (
+        <ErrorMsg error={error} />
       ) : (
-        Object.values(cartProducts).map((item, i) => {
-          return item.quantity === 0 ? null : (
-            <div key={i}>
-              <div className='cartProduct'>
-                {item.inStock === false ? (
-                  <div className='itemNotavAilable'>
-                    item no longer available
-                    <Button
-                      ico={CiCircleRemove}
-                      text={'Remove From Cart'}
-                      className={'btn'}
-                      onClick={() => removeFromCart(item)}
-                    ></Button>
-                  </div>
-                ) : null}
+        <Container>
+          {totalCartItems === 0 ? (
+            <Parag text='Your Cart is empty.' />
+          ) : (
+            Object.values(cartProducts).map((item, i) => {
+              return item.quantity === 0 ? null : (
+                <Container key={i}>
+                  <Container className='cartProduct'>
+                    {item.inStock === false ? (
+                      <Container className='itemNotavAilable'>
+                        item no longer available
+                        <Button
+                          ico={CiCircleRemove}
+                          text={'Remove From Cart'}
+                          className={'btn'}
+                          onClick={() =>
+                            removeObjFromObjsCollect(setCartProducts, item)
+                          }
+                        ></Button>
+                      </Container>
+                    ) : null}
 
-                <Link to={`/product/${item._id}`}>
-                  <Image
-                    src={!item.imgUrl ? null : item.imgUrl[0]}
-                    alt={item.title}
-                    className='cartProdImg'
-                  />
-                </Link>
+                    <Link to={`/product/${item._id}`}>
+                      <Image
+                        src={!item.imgUrl ? null : item.imgUrl[0]}
+                        alt={item.title}
+                        className='cartProdImg'
+                      />
+                    </Link>
 
-                <ProductDescription data={item.desc} className='cartProdDesc' />
-                <div>
-                  <Parag text={`Price: ${item.price} ${currency}`} />
-                  <AiOutlineMinusCircle
-                    className='cart-icon iconCart-align'
-                    onClick={() => substrQuantityFromCart(item)}
-                  />
+                    <ProductDescription
+                      data={item.desc}
+                      className='cartProdDesc'
+                    />
+                    <Container>
+                      <Parag text={`Price: ${item.price} ${currency}`} />
+                      <AiOutlineMinusCircle
+                        className='cart-icon iconCart-align'
+                        onClick={() =>
+                          substrQuantityFromCart(
+                            cartProducts,
+                            setCartProducts,
+                            item
+                          )
+                        }
+                      />
 
-                  <Parag text={item.quantity} className='cart-itemNo ' />
-                  <AiOutlinePlusCircle
-                    className='cart-icon iconCart-align'
-                    onClick={() => addQuantityToCart(item)}
-                  />
+                      <Parag text={item.quantity} className='cart-itemNo ' />
+                      <AiOutlinePlusCircle
+                        className='cart-icon iconCart-align'
+                        onClick={() => addQuantityToCart(setCartProducts, item)}
+                      />
 
-                  <Parag
-                    text={'Remove From Cart'}
-                    className={'remove-from-cart'}
-                    onClick={() => removeFromCart(item)}
-                  />
-                </div>
-                <div>
-                  <Parag text={`Cart Subtotal: `} />
-                  <Parag text={`${item.price * item.quantity} ${currency}`} />
-                </div>
-              </div>
-            </div>
-          );
-        })
+                      <Parag
+                        text={'Remove From Cart'}
+                        className={'remove-from-cart'}
+                        onClick={() =>
+                          removeObjFromObjsCollect(setCartProducts, item)
+                        }
+                      />
+                    </Container>
+                    <Container>
+                      <Parag text={`Cart Subtotal: `} />
+                      <Parag
+                        text={`${item.price * item.quantity} ${currency}`}
+                      />
+                    </Container>
+                  </Container>
+                </Container>
+              );
+            })
+          )}
+
+          {totalCartItems < 1 ? null : (
+            <>
+              <Parag
+                text={`Total: ${getTotalAmount(cartProducts)} ${currency} `}
+              />
+              <Link to='/checkout'>
+                <Button
+                  ico={MdOutlineKeyboardDoubleArrowRight}
+                  text={'Proceed to checkout'}
+                  className={'btn'}
+                ></Button>
+              </Link>
+            </>
+          )}
+        </Container>
       )}
-
-      {totalCartItems < 1 ? null : (
-        <>
-          <Parag text={`Total: ${getTotalAmount(cartProducts)} ${currency} `} />
-          <Link to='/checkout'>
-            <Button
-              ico={MdOutlineKeyboardDoubleArrowRight}
-              text={'Proceed to checkout'}
-              className={'btn'}
-            ></Button>
-          </Link>
-        </>
-      )}
-    </div>
+    </Container>
   );
 };
 
