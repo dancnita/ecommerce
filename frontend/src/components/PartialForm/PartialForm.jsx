@@ -2,11 +2,18 @@ import React, { useState } from 'react';
 import Parag from '../Parag/Parag';
 import TitleH4 from '../TitleH4/TitleH4';
 import InputText from '../InputText/InputText';
-import './form.css';
+import Container from '../Container/Container';
+import './partialForm.css';
 
-const Form = ({ title, inputTemplate, errors, handleChange, className }) => {
+const PartialForm = ({
+  title,
+  inputTemplate,
+  errors,
+  handleChange,
+  className,
+}) => {
   return (
-    <div className='form-container'>
+    <Container className='partialForm-container'>
       <TitleH4 text={title} />
 
       {inputTemplate.map((item, i) => (
@@ -36,8 +43,8 @@ const Form = ({ title, inputTemplate, errors, handleChange, className }) => {
           }
         />
       ))}
-    </div>
+    </Container>
   );
 };
 
-export default Form;
+export default PartialForm;

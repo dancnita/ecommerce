@@ -1,4 +1,4 @@
-.form-container {
+.partialForm-container {
   border: 0.15rem solid var(--x-blue);
   border-radius: 0.5rem;
   max-width: 30vw;
@@ -7,14 +7,14 @@
   padding: 0 1rem;
   text-align: center;
 }
-.form-container > div {
+.partialForm-container > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.form-container input {
+.partialForm-container input {
   border: 0.1rem solid var(--x-blue);
   border-radius: 0.2rem;
   height: 1.8rem;

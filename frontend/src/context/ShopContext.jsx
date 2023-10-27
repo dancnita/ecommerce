@@ -27,17 +27,11 @@ export const ShopContextProvider = (props) => {
 
   useEffect(() => {
     setTotalCartItems(() => getTotalCartItems(cartProducts));
-  }, [cartProducts]);
-
-  useEffect(() => {
-    setTotalFavoriteItems(() => getTotalFavoriteItems(favoriteProd));
-  }, [favoriteProd]);
-
-  useEffect(() => {
     localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
   }, [cartProducts]);
 
   useEffect(() => {
+    setTotalFavoriteItems(() => getTotalFavoriteItems(favoriteProd));
     localStorage.setItem('favoriteProd', JSON.stringify(favoriteProd));
   }, [favoriteProd]);
 
@@ -47,6 +41,14 @@ export const ShopContextProvider = (props) => {
   useEffect(() => {
     localStorage.setItem('billingDet', JSON.stringify(savedBillingDetails));
   }, [savedBillingDetails]);
+
+  // useEffect(() => {
+  //   localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+  // }, [cartProducts]);
+
+  // useEffect(() => {
+  //   localStorage.setItem('favoriteProd', JSON.stringify(favoriteProd));
+  // }, [favoriteProd]);
 
   const contextValue = {
     cartProducts,

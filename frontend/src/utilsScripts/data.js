@@ -118,21 +118,27 @@ const shippingFormValidationTemplateNoPattern = [
 const productsCateg = [
   {
     title: 'Computers',
+    categ: 'Computers',
   },
   {
     title: 'Tablets',
+    categ: 'Tablets',
   },
   {
     title: 'Cell Phones',
+    categ: 'Cell_Phones',
   },
   {
     title: 'Video Games',
+    categ: 'Video_Games',
   },
   {
     title: 'TV & Video',
+    categ: 'TV_Video',
   },
   {
     title: 'Headphones',
+    categ: 'Headphones',
   },
 ];
 

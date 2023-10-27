@@ -1,17 +1,19 @@
 import React from 'react';
 import NavProdCateg from '../NavProdCateg/NavProdCateg';
+import Container from '../Container/Container';
 import { productsCateg } from '../../utilsScripts/data';
 import './navBar.css';
 
 const NavBar = ({ showSideBar, setShowSideBar }) => {
   return (
     <>
-      <div className='topBarSec'>
-        <nav className={showSideBar ? 'navBar show' : 'navBar hide'}>
-          {productsCateg.map((categ, index) => {
+      <Container className='topBarSec'>
+        <Container className={showSideBar ? 'navBar show' : 'navBar hide'}>
+          {productsCateg.map((item, index) => {
             return (
               <NavProdCateg
-                text={categ.title}
+                text={item.title}
+                categ={item.categ}
                 key={index}
                 icoId={index}
                 className='navProdCateg'
@@ -19,8 +21,8 @@ const NavBar = ({ showSideBar, setShowSideBar }) => {
               />
             );
           })}
-        </nav>
-      </div>
+        </Container>
+      </Container>
       {/* <nav className={showSideBar ? 'sideBar show' : 'sideBar hide'}>
         {productsCateg.map((categ, index) => {
           return (

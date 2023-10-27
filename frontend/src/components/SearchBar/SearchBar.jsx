@@ -18,7 +18,7 @@ const SearchBar = () => {
   const [error, setError] = useState(null);
 
   const [isSearchBarFocus, setIsSearchBarFocus] = useState(false);
-  //1 sec delay for user to finish type?
+  //1 sec delay for user to finish typeing?
   useEffect(() => {
     searchInput.length > 2
       ? getData(

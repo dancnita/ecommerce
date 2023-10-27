@@ -7,6 +7,7 @@ import Favorites from '../Favorites/Favorites';
 import NavCart from '../NavCart/NavCart';
 import NavBar from '../NavBar/NavBar';
 import Modal from '../Modal/Modal';
+import Container from '../Container/Container';
 import underConstructionImg from '../../assets/under-construction-website-5kv.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -18,8 +19,8 @@ const Header = () => {
   const BurgerMenuIcon = showSideBar ? AiOutlineClose : GiHamburgerMenu;
 
   return (
-    <div>
-      <div className='topBar'>
+    <Container>
+      <Container className='topBar'>
         <BurgerMenuIcon
           className='sideBarBtn'
           onClick={() => setShowSideBar(!showSideBar)}
@@ -42,9 +43,9 @@ const Header = () => {
             modalImgAlt='under-construction'
           />
         ) : null}
-      </div>
+      </Container>
       <NavBar showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
-    </div>
+    </Container>
   );
 };
 

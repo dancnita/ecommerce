@@ -1,11 +1,12 @@
 import React from 'react';
+import Container from '../Container/Container';
 import Parag from '../../components/Parag/Parag';
 
 const ErrorMsg = ({ error }) => {
   return (
-    <div>
+    <Container>
       <Parag text={` An error occurred: ${error.status} ${error.statusText}`} />
-    </div>
+    </Container>
   );
 };
 

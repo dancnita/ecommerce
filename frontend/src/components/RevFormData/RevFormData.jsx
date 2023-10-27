@@ -1,6 +1,7 @@
 import React from 'react';
 import TitleH2 from '../TitleH2/TitleH2';
 import TitleH4 from '../TitleH4/TitleH4';
+import Container from '../Container/Container';
 import Parag from '../Parag/Parag';
 
 import './refFormData.css';
@@ -14,19 +15,19 @@ const RevFormData = ({
   savedBillingDetails,
 }) => {
   return (
-    <div className='revFormData-container'>
+    <Container className='revFormData-container'>
       <TitleH4 text='Please review Order Details:' />
       <TitleH4 text='Products:' />
       {Object.values(cartProducts).map((item, i) => {
         return (
-          <div key={i}>
+          <Container key={i}>
             <Parag
               text={`${item.quantity} x ${item.title} Subtotal: ${
                 item.price * item.quantity
               }${currency}`}
               className='revFormData-inline'
             />
-          </div>
+          </Container>
         );
       })}
       <Parag text={`Total: ${totalAmount}${currency}`} />
@@ -54,7 +55,7 @@ const RevFormData = ({
           key={i}
         />
       ))}
-    </div>
+    </Container>
   );
 };
 

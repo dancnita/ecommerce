@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Product = require('../models/Product');
 
 // router.get('/product/1', (req, res) => {
-//   res.send('test mmree');
+//   res.send('test mere?');
 // });
 
 //Get Front Page products

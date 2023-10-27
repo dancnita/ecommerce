@@ -5,7 +5,7 @@ import CardWide from '../../components/CardWide/CardWide';
 import './productsList.css';
 import ListAllProdCateg from '../../containers/ListAllProdCateg/ListAllProdCateg';
 import Container from '../../components/Container/Container';
-
+import { productsCateg } from '../../utilsScripts/data';
 import { getData, prodCategUrlById } from '../../utilsScripts/utils_requests';
 import TitleH2 from '../../components/TitleH2/TitleH2';
 import ErrorMsg from '../../components/ErrorMsg/ErrorMsg';
@@ -14,6 +14,7 @@ const ProductList = () => {
   const { id } = useParams();
   const [products, setProducts] = useState();
   const [error, setError] = useState(null);
+  const pageTitle = productsCateg.filter((item) => item.categ === id);
 
   const prodCategUrlByID = prodCategUrlById + `${id}`;
 
@@ -23,7 +24,7 @@ const ProductList = () => {
 
   return (
     <Container className='container'>
-      <TitleH2 text={id} />
+      <TitleH2 text={pageTitle[0].title} />
       {error ? (
         <ErrorMsg error={error} />
       ) : (

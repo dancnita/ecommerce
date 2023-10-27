@@ -1,5 +1,6 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import Container from '../Container/Container';
+import Image from '../Image/Image';
 import './productImgs.css';
 
 const ProductImgs = ({ data, className }) => {
@@ -8,16 +9,16 @@ const ProductImgs = ({ data, className }) => {
     setImgIndex(index);
   };
   return (
-    <div className={className}>
-      <div className='mainImg'>
-        <img src={!data ? null : data[`${imgIndex}`]} alt='' />
-      </div>
-      <div className='secImgs'>
+    <Container className={className}>
+      <Container className='mainImg'>
+        <Image src={!data ? null : data[`${imgIndex}`]} alt='' />
+      </Container>
+      <Container className='secImgs'>
         {!data
           ? null
           : data.map((item, index) => {
               return (
-                <img
+                <Image
                   src={item}
                   alt=''
                   key={index}
@@ -25,8 +26,8 @@ const ProductImgs = ({ data, className }) => {
                 />
               );
             })}
-      </div>
-    </div>
+      </Container>
+    </Container>
   );
 };
 

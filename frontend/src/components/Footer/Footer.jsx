@@ -1,21 +1,24 @@
 import React from 'react';
+import Container from '../Container/Container';
+import Parag from '../Parag/Parag';
+import TitleH4 from '../TitleH4/TitleH4';
 import './footer.css';
 
 const Footer = () => {
   return (
-    <div className='footer'>
-      <div>
-        <h3>Get to Know Us</h3>
-        <p>About Us</p>
-        <p>Careers</p>
-      </div>
-      <div>
-        <h3>Connect with Us</h3>
-        <p>Facebook</p>
-        <p>Twitter</p>
-        <p>Instagram</p>
-      </div>
-    </div>
+    <Container className='footer'>
+      <Container>
+        <TitleH4 text={`Get to Know Us`} />
+        <Parag text={`About Us`} />
+        <Parag text={`Careers`} />
+      </Container>
+      <Container>
+        <TitleH4 text={`Connect with Us`} />
+        <Parag text={`Facebook`} />
+        <Parag text={`Twitter`} />
+        <Parag text={`Instagram`} />
+      </Container>
+    </Container>
   );
 };
 

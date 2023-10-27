@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { ShopContext } from '../../context/ShopContext';
 import { HiOutlineShoppingCart } from 'react-icons/Hi';
 import { HiShoppingCart } from 'react-icons/Hi';
+import Container from '../Container/Container';
 import { Link } from 'react-router-dom';
 import './navCart.css';
 
@@ -9,7 +10,7 @@ const NavCart = () => {
   const { totalCartItems } = useContext(ShopContext);
   return (
     <Link to='/cart' className='text-link'>
-      <div className='navCart'>
+      <Container className='navCart'>
         <span>
           <HiOutlineShoppingCart className='navcart-icon' />
           <span
@@ -20,7 +21,7 @@ const NavCart = () => {
           </span>
         </span>
         <span>My Cart</span>
-      </div>
+      </Container>
     </Link>
   );
 };

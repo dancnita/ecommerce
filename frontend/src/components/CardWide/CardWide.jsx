@@ -5,20 +5,20 @@ import Image from '../Image/Image';
 import Parag from '../Parag/Parag';
 import { currency } from '../../utilsScripts/data';
 import TitleH4 from '../TitleH4/TitleH4';
+import Container from '../Container/Container';
 
 const CardWide = ({ data }) => {
   return (
     <Link to={`/product/${data._id}`} className='text-link'>
-      <div className='cardWide'>
-        <div>
+      <Container className='cardWide'>
+        <Container>
           <Image src={data.imgUrl[0]} alt={data.title} />
-        </div>
-
-        <div>
+        </Container>
+        <Container>
           <TitleH4 text={data.title} />
           <Parag text={`Price: ${data.price} ${currency}`} />
-        </div>
-      </div>
+        </Container>
+      </Container>
     </Link>
   );
 };

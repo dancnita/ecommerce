@@ -7,24 +7,29 @@ import {
   shippingFormValidationTemplate,
   shippingFormValidationTemplateNoPattern,
 } from '../../utilsScripts/data';
-import Form from '../../components/Form/Form';
+import PartialForm from '../../components/PartialForm/PartialForm';
 import { RxUpdate } from 'react-icons/rx';
 import { MdOutlineKeyboardDoubleArrowRight } from 'react-icons/md';
 import './checkout.css';
 import RevFormData from '../../components/RevFormData/RevFormData';
 import { currency } from '../../utilsScripts/data';
 import Parag from '../../components/Parag/Parag';
+import Container from '../../components/Container/Container';
 import {
   getTotalAmount,
   setInput,
+  getProductsIdQty,
+  checkBoxOnChange,
+  filterErrors,
+} from '../../utilsScripts/utils';
+
+import {
   postUrlShipBillCkeck,
   postUrlSaveOrder,
-  postData,
-  postDefaultHeaders,
   postToStripeUrl,
-  getProductsIdQty,
-} from '../../utilsScripts/utils';
-import axios from 'axios';
+  postDefaultHeaders,
+  postData,
+} from '../../utilsScripts/utils_requests';
 
 const Checkout = () => {
   const {
@@ -41,60 +46,43 @@ const Checkout = () => {
   const [shippingFormErrors, setShippingFormErrors] = useState(null);
   const [billingFormErrors, setBillingFormErrors] = useState(null);
 
-  const handleOnChange = () => {
-    setUseShippingAsBillingDet(!useShippingAsBillingDet);
-  };
-
   const onSubmit = (event) => {
     event.preventDefault();
     saveFormData();
   };
-  const saveFormData = async () => {
-    const dataToPost = JSON.stringify([shippingDetails, billingDetails]);
 
-    try {
-      const response = await axios.post(
-        postUrlShipBillCkeck,
-        dataToPost,
-        postDefaultHeaders
-      );
-      setShippingFormErrors(null);
-      setBillingFormErrors(null);
-      setSavedShippingDetails(shippingDetails);
-      setSavedBillingDetails(billingDetails);
-    } catch (error) {
-      const getShippingFormErrors = error.response.data.errors.filter((item) =>
-        Object.values(item).some((str) => str.includes('[0]'))
-      );
-      const getBillingFormErrors = error.response.data.errors.filter((item) =>
-        Object.values(item).some((str) => str.includes('[1]'))
-      );
-      setShippingFormErrors(getShippingFormErrors);
-      setBillingFormErrors(getBillingFormErrors);
-    }
+  const saveFormData = () => {
+    const dataToPost = JSON.stringify([shippingDetails, billingDetails]);
+    postData(postUrlShipBillCkeck, dataToPost, postDefaultHeaders).then(
+      (res) => {
+        if (res.status === 200) {
+          setShippingFormErrors(null);
+          setBillingFormErrors(null);
+          setSavedShippingDetails(shippingDetails);
+          setSavedBillingDetails(billingDetails);
+        } else {
+          setShippingFormErrors(filterErrors(res.data.errors, '[0]'));
+          setBillingFormErrors(filterErrors(res.data.errors, '[1]'));
+        }
+      }
+    );
   };
 
-  const placeOrder = async () => {
-    if (Object.values(savedBillingDetails).length === 0) return;
+  const placeOrder = () => {
     const dataToPost = JSON.stringify({
       savedShippingDetails,
       savedBillingDetails,
       products: getProductsIdQty(cartProducts),
     });
-    try {
-      const response = await axios.post(
-        postUrlSaveOrder,
-        dataToPost,
-        postDefaultHeaders
-      );
-      if (response.data.success !== true) {
-        throw new Error(`Request failed: ${response.status}`);
+    postData(postUrlSaveOrder, dataToPost, postDefaultHeaders).then((res) => {
+      if (res.data.success === true) {
+        const orderId = res.data.savedOrder;
+        getStripe(orderId);
+      } else {
+        throw new Error(`Request failed: ${res.status}`);
+        //set error // display error
       }
-      const orderId = response.data.savedOrder;
-      getStripe(orderId);
-    } catch (error) {
-      console.log(error);
-    }
+    });
   };
 
   const getStripe = (orderId) => {
@@ -102,16 +90,16 @@ const Checkout = () => {
       orderId: orderId,
     });
     postData(postToStripeUrl, dataToPost, postDefaultHeaders)
-      .then((response) => {
-        if (response.statusText === 'OK') {
-          return response.data;
+      .then((res) => {
+        if (res.statusText === 'OK') {
+          return res.data;
+        } else {
+          throw new Error(`Request failed: ${res.status}`);
+          //set error // display error
         }
       })
       .then(({ url }) => {
         window.location = url;
-      })
-      .catch((error) => {
-        console.log(error);
       });
   };
 
@@ -120,29 +108,34 @@ const Checkout = () => {
   }, [useShippingAsBillingDet, shippingDetails]);
 
   return (
-    <div className='checkout-container'>
+    <Container className='checkout-container'>
       <TitleH2 text={'Checkout'} />
-      <div className='checkout-forms'>
+      <Container className='checkout-forms'>
         <form onSubmit={onSubmit}>
-          <Form
+          <PartialForm
             onSubmit={onSubmit}
             title={`Please ${
               Object.values(savedShippingDetails).length < 1
                 ? 'enter'
                 : 'update'
             } shipping details`}
-            inputTemplate={shippingFormValidationTemplateNoPattern}
+            inputTemplate={shippingFormValidationTemplate}
             errors={shippingFormErrors}
             handleChange={(input) => setInput(setShippingDetails, input)}
           />
           <Checkbox
             checked={useShippingAsBillingDet}
-            onChange={handleOnChange}
+            onChange={() =>
+              checkBoxOnChange(
+                useShippingAsBillingDet,
+                setUseShippingAsBillingDet
+              )
+            }
             text='Use shipping details as billing details'
           />
 
           {useShippingAsBillingDet ? null : (
-            <Form
+            <PartialForm
               onSubmit={onSubmit}
               title={`Please ${
                 Object.values(savedBillingDetails).length < 1
@@ -163,7 +156,7 @@ const Checkout = () => {
             className='btn'
           />
         </form>
-        <div>
+        <Container>
           <RevFormData
             cartProducts={cartProducts}
             currency={currency}
@@ -172,10 +165,12 @@ const Checkout = () => {
             savedShippingDetails={savedShippingDetails}
             savedBillingDetails={savedBillingDetails}
           />
-        </div>
-      </div>
+        </Container>
+      </Container>
       <Button
-        onClick={() => placeOrder()}
+        onClick={() =>
+          Object.values(savedBillingDetails).length === 0 ? null : placeOrder()
+        }
         ico={MdOutlineKeyboardDoubleArrowRight}
         text='Proceed to payment'
         className='btn'
@@ -188,8 +183,56 @@ const Checkout = () => {
             : null
         }
       />
-    </div>
+    </Container>
   );
 };
 
 export default Checkout;
+
+// const saveFormData = async () => {
+//   const dataToPost = JSON.stringify([shippingDetails, billingDetails]);
+
+//   try {
+//     const response = await axios.post(
+//       postUrlShipBillCkeck,
+//       dataToPost,
+//       postDefaultHeaders
+//     );
+//     setShippingFormErrors(null);
+//     setBillingFormErrors(null);
+//     setSavedShippingDetails(shippingDetails);
+//     setSavedBillingDetails(billingDetails);
+//   } catch (error) {
+//     const getShippingFormErrors = error.response.data.errors.filter((item) =>
+//       Object.values(item).some((str) => str.includes('[0]'))
+//     );
+//     const getBillingFormErrors = error.response.data.errors.filter((item) =>
+//       Object.values(item).some((str) => str.includes('[1]'))
+//     );
+//     setShippingFormErrors(getShippingFormErrors);
+//     setBillingFormErrors(getBillingFormErrors);
+//   }
+// };
+
+// const placeOrder = async () => {
+//   if (Object.values(savedBillingDetails).length === 0) return;
+//   const dataToPost = JSON.stringify({
+//     savedShippingDetails,
+//     savedBillingDetails,
+//     products: getProductsIdQty(cartProducts),
+//   });
+//   try {
+//     const response = await axios.post(
+//       postUrlSaveOrder,
+//       dataToPost,
+//       postDefaultHeaders
+//     );
+//     if (response.data.success !== true) {
+//       throw new Error(`Request failed: ${response.status}`);
+//     }
+//     const orderId = response.data.savedOrder;
+//     getStripe(orderId);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

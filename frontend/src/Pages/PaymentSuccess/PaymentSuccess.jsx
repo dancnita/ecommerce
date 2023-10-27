@@ -5,6 +5,7 @@ import { AiOutlineCheckCircle } from 'react-icons/ai';
 import { MdOutlineKeyboardDoubleArrowRight } from 'react-icons/md';
 import './PaymentSuccess.css';
 import Button from '../../components/Button/Button';
+import Container from '../../components/Container/Container';
 import { ShopContext } from '../../context/ShopContext';
 
 const PaymentSuccess = () => {
@@ -17,7 +18,7 @@ const PaymentSuccess = () => {
   }, []);
 
   return (
-    <div className='pay-succ-container'>
+    <Container className='pay-succ-container'>
       <AiOutlineCheckCircle className='icon-pay-succ' />
       <Parag className='parag-pay-succ' text='Thank you for your order!' />
       <Link to='/'>
@@ -27,7 +28,7 @@ const PaymentSuccess = () => {
           text='Continue Shopping'
         />
       </Link>
-    </div>
+    </Container>
   );
 };
 

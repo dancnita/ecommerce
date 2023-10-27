@@ -8,8 +8,6 @@ const findProdUrl = `${baseApiUrl}find/`;
 const getProdctsUrl = `${baseApiUrl}products`;
 const searchProductsUrl = `${baseApiUrl}products/?searchDT=`;
 const prodCategUrlById = `${baseApiUrl}products/?category=`;
-//
-
 const postUrlShipBillCkeck = `${baseApiUrl}order/shipBillCkeck`;
 const postUrlSaveOrder = `${baseApiUrl}order/save`;
 const postToStripeUrl = `${baseApiUrl}create-checkout-session`;
@@ -49,6 +47,32 @@ const getCartProductsInfo = async (
   }
 };
 
+const postData = async (url, dataToPost, options) => {
+  try {
+    const response = await axios.post(url, dataToPost, options);
+    return response;
+  } catch (error) {
+    //console.log(error.response);
+    return error.response;
+  }
+};
+const placeOrder = () => {
+  const dataToPost = JSON.stringify({
+    savedShippingDetails,
+    savedBillingDetails,
+    products: getProductsIdQty(cartProducts),
+  });
+  postData(postUrlSaveOrder, dataToPost, postDefaultHeaders).then((res) => {
+    if (res.data.success === true) {
+      const orderId = res.data.savedOrder;
+      getStripe(orderId);
+    } else {
+      throw new Error(`Request failed: ${res.status}`);
+      //set error // display error
+    }
+  });
+};
+
 export {
   productCategUrl,
   frontPageProdUrl,
@@ -58,4 +82,8 @@ export {
   prodCategUrlById,
   getCartProductsInfo,
   searchProductsUrl,
+  postUrlShipBillCkeck,
+  postUrlSaveOrder,
+  postToStripeUrl,
+  postData,
 };

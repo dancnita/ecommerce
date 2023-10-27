@@ -3,12 +3,13 @@ import { AiOutlineClose } from 'react-icons/ai';
 import Image from '../Image/Image';
 import Button from '../Button/Button';
 import Parag from '../Parag/Parag';
+import Container from '../Container/Container';
 import './modal.css';
 
 const Modal = ({ toggleModal, modalMsg, modalImgSrc, modalImgAlt }) => {
   return (
-    <div className='modal-container'>
-      <div className='modal-content'>
+    <Container className='modal-container '>
+      <Container className='modal-content modal-fade'>
         <AiOutlineClose
           className='modal-icon modal-close'
           onClick={() => toggleModal(false)}
@@ -21,8 +22,8 @@ const Modal = ({ toggleModal, modalMsg, modalImgSrc, modalImgAlt }) => {
           ico={AiOutlineClose}
           className='btn modal-btn'
         />
-      </div>
-    </div>
+      </Container>
+    </Container>
   );
 };
 
