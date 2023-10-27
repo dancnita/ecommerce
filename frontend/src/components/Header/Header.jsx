@@ -11,6 +11,7 @@ import Container from '../Container/Container';
 import underConstructionImg from '../../assets/under-construction-website-5kv.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiOutlineClose } from 'react-icons/ai';
+import Register from '../../Pages/Register/Register';
 
 const Header = () => {
   const [showModal, setShowModal] = useState(false);

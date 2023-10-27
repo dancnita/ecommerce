@@ -13,6 +13,7 @@ import NotFound from './Pages/NotFound/NotFound';
 import FavoritesPage from './Pages/FavoritesPage/FavoritesPage';
 import SearchResultList from './Pages/SearchResultList/SearchResultList';
 import AdminAddProd from './Pages/AdminAddProd/AdminAddProd';
+import Register from './Pages/Register/Register';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/register' element={<Register />} />
           <Route path='/productList/:id' element={<ProductList />} />
           <Route path='/product/:id' element={<Product />} />
           <Route path='/cart' element={<CartPage />} />
